@@ -1,11 +1,23 @@
-<header class="bg-white shadow-sm border-b border-gray-200">
+@php
+    $routeName = Route::currentRouteName();
+    $pageTitle = match($routeName) {
+        'dashboard' => 'Dashboard',
+        'books.index' => 'Buku',
+        'books.create' => 'Tambah Buku',
+        'members.index' => 'Daftar Anggota',
+        default => 'Halaman'
+    };
+@endphp
+
+<header class="bg-white my-2 mx-3 rounded-xl shadow-sm border-b border-gray-200">
                 <div class="flex items-center justify-between px-6 py-4">
                     <div class="flex items-center space-x-4">
                         <button @click="sidebarOpen = !sidebarOpen"
-                                class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                            <i class="fas fa-bars text-gray-600"></i>
+                                class="lg:hidden  p-2 rounded-lg hover:bg-gray-100 transition-colors">
+
+                                <i class="fas fa-bars text-gray-600"></i>
                         </button>
-                        <h1 class="text-2xl font-bold text-gray-800" x-text="pageTitle"></h1>
+                        <h1 class="text-2xl font-bold text-gray-800">{{ $pageTitle }}</h1>
                     </div>
 
                     <!-- Header Actions -->

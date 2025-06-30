@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['admin', 'anggota', 'pustakawan'])->default('anggota');
+            $table->integer('total_points')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -35,6 +37,30 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        Schema::create('user_points', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->integer('points')->default(0);
+            $table->timestamps();
+        });
+
+        Schema::create('badges', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('icon')->nullable();
+            $table->integer('points_required');
+            $table->text('description')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('user_badges', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('badge_id')->constrained()->onDelete('cascade');
+            $table->timestamp('earned_at');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -45,5 +71,8 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('user_points');
+        Schema::dropIfExists('badges');
+        Schema::dropIfExists('user_badges');
     }
 };

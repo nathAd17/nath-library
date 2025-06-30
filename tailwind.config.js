@@ -13,15 +13,24 @@ export default {
                 notosans: ["Noto Sans", "sans-serif"],
             },
             colors: {
-                primary: "#3B82F6",
-                secondary: "#8B5CF6",
-                accent: "#F59E0B",
-                success: "#10B981",
-                danger: "#EF4444",
-                warning: "#F59E0B",
-                info: "#3B82F6",
-                dark: "#1F2937",
-                light: "#F3F4F6",
+                primarylight: "#cffafe", // cyan-100
+                primary: "#0891b2", // cyan 600
+                primarydark: "#164e63", // cyan 800
+                success: "#22c55e", // green 500
+                successlight: "#dcfce7", // green 100
+                successdark: "#166534", // green 800
+                warninglight: "#fef3c7", // amber 100
+                warningdark: "#92400e", // amber 800
+                warning: "#f59e0b", // amber 500
+                danger: "#f43f5e", // rose 500
+                dangerlight: "#ffe4e6", // rose 100
+                dangerdark: "#9f1239", // rose 800
+                dark: "#374151", // gray 700
+                darkhover: "#1f2937", // gray 800
+                light: "#f9fafb", // gray 50
+                lighthover: "#e2e8f0", // gray 100
+                muted: "#9ca3af", // gray 400
+                info: "#2563eb", // blue 600
             },
         },
     },

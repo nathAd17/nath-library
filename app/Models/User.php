@@ -20,6 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'total_points'
     ];
 
     /**
@@ -42,6 +44,78 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'total_points' => 'integer',
         ];
     }
+
+    // Role constants
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function bookReviews()
+    {
+        return $this->hasMany(BookReview::class);
+    }
+
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function badges()
+    {
+        return $this->belongsToMany(Badge::class, 'user_badges')->withPivot('earned_at');
+    }
+
+    public function gamificationLogs()
+    {
+        return $this->hasMany(GamificationLog::class);
+    }
+
+    // Scopes
+    public function scopeByRole($query, $role)
+    {
+        return $query->where('role', $role);
+    }
+
+    // Helper methods
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isPustakawan()
+    {
+        return $this->role === 'pustakawan';
+    }
+
+    public function isAnggota()
+    {
+        return $this->role === 'anggota';
+    }
+
+    public function canManageBooks()
+    {
+        return in_array($this->role, ['admin', 'pustakawan']);
+    }
+
+    public function addPoints($points, $activity, $description = null)
+    {
+        $this->increment('total_points', $points);
+
+        GamificationLog::create([
+            'user_id' => $this->id,
+            'activity_type' => $activity,
+            'points_earned' => $points,
+            'description' => $description,
+        ]);
+    }
+
 }

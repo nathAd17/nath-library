@@ -1,51 +1,51 @@
 @extends('layout')
 @section('content')
-<div x-show="activeMenu === 'Dashboard'">
+<div>
                     <!-- Stats Cards -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 text-white transform hover:scale-105 transition-transform duration-200 shadow-lg">
+                        <div class="bg-gradient-to-r from-cyan-50 to-cyan-200 rounded-xl p-6 text-dark transform hover:scale-105 transition-transform duration-200 shadow-lg">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-blue-100 text-sm">Total Buku</p>
+                                    <p class="text-graydark text-sm">Total Buku</p>
                                     <p class="text-3xl font-bold">1,234</p>
                                 </div>
-                                <div class="bg-blue-400 bg-opacity-30 rounded-full p-3">
-                                    <i class="fas fa-book text-2xl"></i>
+                                <div class="bg-cyan-600 bg-opacity-30 rounded-lg p-3">
+                                    <i class="fas fa-book text-2xl px-1 text-center"></i>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-white transform hover:scale-105 transition-transform duration-200 shadow-lg">
+                        <div class="bg-gradient-to-r from-green-50 to-green-200 rounded-xl p-6 text-graydark transform hover:scale-105 transition-transform duration-200 shadow-lg">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-green-100 text-sm">Dipinjam Hari Ini</p>
+                                    <p class="text-graydark text-sm">Dipinjam Hari Ini</p>
                                     <p class="text-3xl font-bold">45</p>
                                 </div>
-                                <div class="bg-green-400 bg-opacity-30 rounded-full p-3">
+                                <div class="bg-green-600 bg-opacity-30 rounded-lg p-3">
                                     <i class="fas fa-hand-holding-heart text-2xl"></i>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-6 text-white transform hover:scale-105 transition-transform duration-200 shadow-lg">
+                        <div class="bg-gradient-to-r from-purple-50 to-purple-200 rounded-xl p-6 text-graydark transform hover:scale-105 transition-transform duration-200 shadow-lg">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-purple-100 text-sm">Anggota Aktif</p>
+                                    <p class="text-graydark text-sm">Anggota Aktif</p>
                                     <p class="text-3xl font-bold">892</p>
                                 </div>
-                                <div class="bg-purple-400 bg-opacity-30 rounded-full p-3">
+                                <div class="bg-purple-600 bg-opacity-30 rounded-lg p-3">
                                     <i class="fas fa-users text-2xl"></i>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-6 text-white transform hover:scale-105 transition-transform duration-200 shadow-lg">
+                        <div class="bg-gradient-to-r from-orange-50 to-orange-200 rounded-xl p-6 text-graydark transform hover:scale-105 transition-transform duration-200 shadow-lg">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-orange-100 text-sm">Terlambat</p>
+                                    <p class="text-graydark text-sm">Terlambat</p>
                                     <p class="text-3xl font-bold">12</p>
                                 </div>
-                                <div class="bg-orange-400 bg-opacity-30 rounded-full p-3">
+                                <div class="bg-orange-400 bg-opacity-30 rounded-lg p-3">
                                     <i class="fas fa-exclamation-triangle text-2xl"></i>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                                 <template x-for="(user, index) in topUsers" :key="user.id">
                                     <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                                         <div class="flex items-center space-x-3">
-                                            <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm"
+                                            <div class="w-8 h-8 bg-gradient-to-r from-blue-200 to-blue-400 rounded-full flex items-center justify-center text-white font-bold text-sm"
                                                  x-text="index + 1"></div>
                                             <div>
                                                 <p class="font-medium text-gray-800 text-sm" x-text="user.name"></p>
