@@ -1,10 +1,56 @@
 @extends('layout')
 @section('content')
     <!-- Content -->
-    <div x-data="bookApp()">
+    <div x-data="anggotaApp()">
         <!-- Stats Cards -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <x-stat-component :stats="$booksStat" />
+            <div class="shadow-lg shadow-lighthover bg-gradient-to-r from-cyan-50 from-40% to-cyan-200 to-100% p-6 rounded-xl">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-gray-600 text-sm font-medium">Total Pengguna</h3>
+                        <p class="text-3xl font-bold text-gray-900">1,234</p>
+                    </div>
+                    <div class="w-12 h-12 bg-cyan-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-user text-white text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shadow-lg shadow-lighthover bg-gradient-to-r from-green-50 from-40% to-green-200 to-100% p-6 rounded-xl">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-gray-600 text-sm font-medium">Anggota</h3>
+                        <p class="text-3xl font-bold text-gray-900">892</p>
+                    </div>
+                    <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-check-circle text-white text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shadow-lg shadow-lighthover bg-gradient-to-r from-purple-50 from-40% to-purple-200 to-100% p-6 rounded-xl">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-gray-600 text-sm font-medium">Dipinjam</h3>
+                        <p class="text-3xl font-bold text-gray-900">342</p>
+                    </div>
+                    <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-user-reader text-white text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shadow-lg shadow-lighthover bg-gradient-to-r from-orange-50 from-40% to-orange-200 to-100% p-6 rounded-xl">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-gray-600 text-sm font-medium">Kategori</h3>
+                        <p class="text-3xl font-bold text-gray-900">28</p>
+                    </div>
+                    <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tags text-white text-xl"></i>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Action Bar -->
@@ -14,24 +60,23 @@
                     <button @click="showForm = true; editMode = false; resetForm()"
                         class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
                         <i class="fas fa-plus"></i>
-                        <span>Tambah Buku</span>
+                        <span>Tambah Pengguna</span>
                     </button>
-                    <select class="border border-gray-300 rounded-lg px-3 py-2" x-model="selectedCategory">
-                        <option value="">Semua Kategori</option>
-                        @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <select class="border border-gray-300 rounded-lg px-3 py-2" x-model="selectedRole">
+                        <option value="">Semua Role</option>
+                        @foreach ($roles as $role)
+                        <option value="{{ $role}}">{{ $role}}</option>
                         @endforeach
                     </select>
                     <select class="border border-gray-300 rounded-lg px-3 py-2" x-model="sortBy">
-                        <option value="title">Urutkan: Judul</option>
-                        <option value="author">Urutkan: Pengarang</option>
-                        <option value="year">Urutkan: Tahun</option>
-                        <option value="stock">Urutkan: Stok</option>
+                        <option value="name">Urutkan: Nama</option>
+                        <option value="role">Urutkan: Role</option>
+                        <option value="total_points">Urutkan: Total points</option>
                     </select>
                 </div>
                 <div class="flex items-center space-x-2">
                     <span class="text-gray-600 text-sm">Total: <span class="font-semibold"
-                            x-text="filteredBooks.length"></span> buku</span>
+                            x-text="filteredUsers.length"></span> Pengguna</span>
                 </div>
             </div>
         </div>
@@ -42,73 +87,59 @@
                 <table class="w-full">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cover
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gambar
                             </th>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Buku
-                            </th>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Kategori</th>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stok
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama
                             </th>
                             <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Rating</th>
+                                Role</th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total points
+                            </th>
                             <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi
                             </th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        <template x-for="book in paginatedBooks" :key="book.id">
+                        <template x-for="user in paginatedUsers" :key="user.id">
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div
-                                        class="w-12 h-16 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden">
-                                        <img :src="book.cover_image || '/api/placeholder/48/64'" :alt="book.title"
+                                        class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                                        <img :src="`https://ui-avatars.com/api/?name=${user.name}&background=3B82F6&color=fff`" :alt="user.name"
                                             class="w-full h-full object-cover">
                                     </div>
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="max-w-xs">
-                                        <div class="text-sm font-medium text-gray-900 truncate" x-text="book.title"></div>
-                                        <div class="text-sm text-gray-500 truncate" x-text="book.author"></div>
-                                        <div class="text-xs text-gray-400" x-text="book.publisher + ' • ' + book.year">
+                                        <div class="text-sm font-medium text-gray-900 truncate" x-text="user.name"></div>
+                                        <div class="text-xs text-gray-400" x-text="user.email">
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
                                         class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
-                                        x-text="book.category.name"></span>
+                                        x-text="user.role"></span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center space-x-2">
-                                        <span class="text-sm font-medium text-gray-900" x-text="book.stock"></span>
-                                        <span class="text-xs text-gray-500">unit</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center space-x-1">
-                                        <div class="flex text-yellow-400">
-                                            <template x-for="i in 5">
-                                                <i class="fas fa-star text-xs"
-                                                    :class="i <= book.rating ? 'text-yellow-400' : 'text-gray-300'"></i>
-                                            </template>
-                                        </div>
-                                        <span class="text-xs text-gray-500" x-text="book.rating + '/5'"></span>
+                                        <span class="text-sm font-medium text-gray-900" x-text="user.total_points"></span>
+                                        <span class="text-xs text-gray-500">pts</span>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                     <div class="flex items-center space-x-2">
-                                        <button @click="viewBook(book)"
+                                        <button @click="viewUser(user)"
                                             class="text-blue-600 hover:text-blue-900 p-1 rounded transition-colors"
                                             title="Lihat Detail">
                                             <i class="fas fa-eye"></i>
                                         </button>
-                                        <button @click="editBook(book)"
+                                        <button @click="editUser(user)"
                                             class="text-green-600 hover:text-green-900 p-1 rounded transition-colors"
                                             title="Edit">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button @click="deleteBook(book)"
+                                        <button @click="deleteUser(user)"
                                             class="text-red-600 hover:text-red-900 p-1 rounded transition-colors"
                                             title="Hapus">
                                             <i class="fas fa-trash"></i>
@@ -125,8 +156,8 @@
             <div class="bg-white px-6 py-4 border-t border-gray-200 flex items-center justify-between">
                 <div class="text-sm text-gray-700">
                     Menampilkan <span x-text="(currentPage - 1) * itemsPerPage + 1"></span> sampai
-                    <span x-text="Math.min(currentPage * itemsPerPage, filteredBooks.length)"></span> dari
-                    <span x-text="filteredBooks.length"></span> buku
+                    <span x-text="Math.min(currentPage * itemsPerPage, filteredUsers.length)"></span> dari
+                    <span x-text="filteredUsers.length"></span> buku
                 </div>
                 <div class="flex items-center space-x-2">
                     <button @click="currentPage > 1 && currentPage--" :disabled="currentPage === 1"
@@ -160,7 +191,7 @@
                         <div class="bg-white px-6 pt-6 pb-4">
                             <div class="flex items-center justify-between mb-4">
                                 <h3 class="text-lg font-medium text-gray-900"
-                                    x-text="editMode ? 'Edit Buku' : 'Tambah Buku Baru'"></h3>
+                                    x-text="editMode ? 'Edit User' : 'Tambah User Baru'"></h3>
                                 <button type="button" @click="showForm = false" class="text-gray-400 hover:text-gray-600">
                                     <i class="fas fa-times text-xl"></i>
                                 </button>
@@ -168,71 +199,28 @@
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div class="md:col-span-2">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Judul Buku *</label>
-                                    <input type="text" x-model="form.title"
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Nama *</label>
+                                    <input type="text" x-model="form.name"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        placeholder="Masukkan judul buku" required>
+                                        placeholder="Masukkan nama pengguna" required>
                                 </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Pengarang *</label>
-                                    <input type="text" x-model="form.author"
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                                    <input type="text" x-model="form.email"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        placeholder="Nama pengarang" required>
+                                        placeholder="Masukan email pengguna" required>
                                 </div>
-
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Penerbit *</label>
-                                    <input type="text" x-model="form.publisher"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        placeholder="Nama penerbit" required>
-                                </div>
-
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Tahun Terbit *</label>
-                                    <input type="number" x-model="form.year"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        placeholder="2024" min="1900" max="2030" required>
-                                </div>
-
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">ISBN</label>
-                                    <input type="text" x-model="form.isbn"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        placeholder="978-0-123456-78-9">
-                                </div>
-
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Kategori *</label>
-                                    <select x-model="form.category_id"
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Role *</label>
+                                    <select x-model="form.role"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                         required>
                                         <option value="">Pilih Kategori</option>
-                                        <option value="1">Teknologi</option>
-                                        <option value="2">Bisnis</option>
-                                        <option value="3">Fiksi</option>
-                                        <option value="4">Sejarah</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="anggota">Anggota</option>
+                                        <option value="pustakawan">Pustakawan</option>
                                     </select>
-                                </div>
-
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Stok *</label>
-                                    <input type="number" x-model="form.stock"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        placeholder="10" min="0" required>
-                                </div>
-
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Cover Buku</label>
-                                    <input type="file" accept="image/*"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                </div>
-
-                                <div class="md:col-span-2">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Deskripsi</label>
-                                    <textarea x-model="form.description" rows="3"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                        placeholder="Deskripsi singkat tentang buku..."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -244,7 +232,7 @@
                             </button>
                             <button type="submit"
                                 class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700">
-                                <span x-text="editMode ? 'Update Buku' : 'Simpan Buku'"></span>
+                                <span x-text="editMode ? 'Update User' : 'Simpan User'"></span>
                             </button>
                         </div>
                     </form>
@@ -264,65 +252,34 @@
                     class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
                     <div class="bg-white px-6 pt-6 pb-4">
                         <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-medium text-gray-900">Detail Buku</h3>
+                            <h3 class="text-lg font-medium text-gray-900">Detail Pengguna</h3>
                             <button type="button" @click="showDetail = false" class="text-gray-400 hover:text-gray-600">
                                 <i class="fas fa-times text-xl"></i>
                             </button>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" x-show="selectedBook">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" x-show="selectedUser">
                             <div class="md:col-span-1">
-                                <div class="w-full h-64 bg-gray-200 rounded-lg overflow-hidden">
-                                    <img :src="selectedBook?.cover_image || '/api/placeholder/200/300'"
-                                        :alt="selectedBook?.title" class="w-full h-full object-cover">
+                                <div class="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden">
+                                    <img :src="`https://ui-avatars.com/api/?name=${selectedUser?.name}&background=3B82F6&color=fff`"
+                                        :alt="selectedUser?.name" class="w-full h-full object-cover">
                                 </div>
                             </div>
 
                             <div class="md:col-span-2 space-y-4">
                                 <div>
-                                    <h4 class="text-xl font-bold text-gray-900" x-text="selectedBook?.title"></h4>
-                                    <p class="text-gray-600" x-text="'oleh ' + selectedBook?.author"></p>
+                                    <h4 class="text-xl font-bold text-gray-900" x-text="selectedUser?.name"></h4>
                                 </div>
 
                                 <div class="grid grid-cols-2 gap-4 text-sm">
                                     <div>
-                                        <span class="font-medium text-gray-700">Penerbit:</span>
-                                        <p class="text-gray-600" x-text="selectedBook?.publisher"></p>
+                                        <span class="font-medium text-gray-700">Email:</span>
+                                        <p class="text-gray-600" x-text="selectedUser?.email"></p>
                                     </div>
                                     <div>
-                                        <span class="font-medium text-gray-700">Tahun:</span>
-                                        <p class="text-gray-600" x-text="selectedBook?.year"></p>
+                                        <span class="font-medium text-gray-700">Role:</span>
+                                        <p class="text-gray-600" x-text="selectedUser?.role"></p>
                                     </div>
-                                    <div>
-                                        <span class="font-medium text-gray-700">ISBN:</span>
-                                        <p class="text-gray-600" x-text="selectedBook?.isbn || '-'"></p>
-                                    </div>
-                                    <div>
-                                        <span class="font-medium text-gray-700">Stok:</span>
-                                        <p class="text-gray-600" x-text="selectedBook?.stock + ' unit'"></p>
-                                    </div>
-                                    <div>
-                                        <span class="font-medium text-gray-700">Kategori:</span>
-                                        <p class="text-gray-600" x-text="selectedBook?.category"></p>
-                                    </div>
-                                    <div>
-                                        <span class="font-medium text-gray-700">Rating:</span>
-                                        <div class="flex items-center space-x-1">
-                                            <div class="flex text-yellow-400">
-                                                <template x-for="i in 5">
-                                                    <i class="fas fa-star text-sm"
-                                                        :class="i <= selectedBook?.rating ? 'text-yellow-400' : 'text-gray-300'"></i>
-                                                </template>
-                                            </div>
-                                            <span class="text-sm text-gray-600" x-text="selectedBook?.rating + '/5'"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <span class="font-medium text-gray-700">Deskripsi:</span>
-                                    <p class="text-gray-600 mt-1"
-                                        x-text="selectedBook?.description || 'Tidak ada deskripsi'"></p>
                                 </div>
                             </div>
                         </div>
@@ -333,9 +290,9 @@
                             class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
                             Tutup
                         </button>
-                        <button type="button" @click="editBook(selectedBook); showDetail = false"
+                        <button type="button" @click="editUser(selectedUser); showDetail = false"
                             class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700">
-                            Edit Buku
+                            Edit Pengguna
                         </button>
                     </div>
                 </div>
@@ -364,16 +321,16 @@
                             </div>
                         </div>
 
-                        <div class="bg-gray-50 p-4 rounded-lg" x-show="bookToDelete">
+                        <div class="bg-gray-50 p-4 rounded-lg" x-show="userToDelete">
                             <div class="flex items-center space-x-3">
                                 <div
                                     class="w-12 h-16 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden">
-                                    <img :src="bookToDelete?.cover_image || '/api/placeholder/48/64'"
-                                        :alt="bookToDelete?.title" class="w-full h-full object-cover">
+                                    <img :src="userToDelete?.cover_image || '/api/placeholder/48/64'"
+                                        :alt="userToDelete?.title" class="w-full h-full object-cover">
                                 </div>
                                 <div>
-                                    <p class="font-medium text-gray-900" x-text="bookToDelete?.title"></p>
-                                    <p class="text-sm text-gray-500" x-text="bookToDelete?.author"></p>
+                                    <p class="font-medium text-gray-900" x-text="userToDelete?.title"></p>
+                                    <p class="text-sm text-gray-500" x-text="userToDelete?.author"></p>
                                 </div>
                             </div>
                         </div>
@@ -383,7 +340,7 @@
                     </div>
 
                     <div class="bg-gray-50 px-6 py-3 flex items-center justify-end space-x-3">
-                        <button type="button" @click="showDeleteConfirm = false; bookToDelete = null"
+                        <button type="button" @click="showDeleteConfirm = false; userToDelete = null"
                             class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
                             Batal
                         </button>
@@ -425,36 +382,32 @@
     </div>
 
     <script>
-        function bookApp() {
+        function anggotaApp() {
             return {
                 // Data
-                books: @json($books),
+                users: @json($users),
 
                     // UI State
                 showForm: false,
                 showDetail: false,
                 showDeleteConfirm: false,
                 editMode: false,
-                selectedBook: null,
-                bookToDelete: null,
+                selectedUser: null,
+                userToDelete: null,
 
                 // Form Data
                 form: {
                     id: null,
-                    title: '',
-                    author: '',
-                    publisher: '',
-                    year: new Date().getFullYear(),
-                    isbn: '',
-                    description: '',
-                    category_id: '',
-                    stock: 1
+                    name: '',
+                    email: '',
+                    role: '',
+                    total_points: '',
                 },
 
                 // Filters & Search
                 searchQuery: '',
-                selectedCategory: '',
-                sortBy: 'title',
+                selectedRole: '',
+                sortBy: 'name',
                 currentPage: 1,
                 itemsPerPage: 5,
 
@@ -466,35 +419,33 @@
                 },
 
                 // Computed Properties
-                get filteredBooks() {
-                    let filtered = this.books;
+                get filteredUsers() {
+                    let filtered = this.users;
 
                     // Filter by search query
                     if (this.searchQuery) {
                         const query = this.searchQuery.toLowerCase();
-                        filtered = filtered.filter(book =>
-                            book.title.toLowerCase().includes(query) ||
-                            book.author.toLowerCase().includes(query) ||
-                            book.publisher.toLowerCase().includes(query)
+                        filtered = filtered.filter(user =>
+                            user.name.toLowerCase().includes(query) ||
+                            user.email.toLowerCase().includes(query) ||
+                            user.role.toLowerCase().includes(query)
                         );
                     }
 
-                    // Filter by category
-                    if (this.selectedCategory) {
-                        filtered = filtered.filter(book => book.category_id == this.selectedCategory);
+                    // Filter by role
+                    if (this.selectedRole) {
+                        filtered = filtered.filter(user => user.role == this.selectedRole);
                     }
 
                     // Sort
                     filtered.sort((a, b) => {
                         switch (this.sortBy) {
-                            case 'title':
-                                return a.title.localeCompare(b.title);
-                            case 'author':
-                                return a.author.localeCompare(b.author);
-                            case 'year':
-                                return b.year - a.year;
-                            case 'stock':
-                                return b.stock - a.stock;
+                            case 'name':
+                                return a.name.localeCompare(b.name);
+                            case 'email':
+                                return a.email.localeCompare(b.email);
+                            case 'role':
+                                return a.role.localeCompare(b.role);
                             default:
                                 return 0;
                         }
@@ -503,115 +454,106 @@
                     return filtered;
                 },
 
-                get paginatedBooks() {
+                get paginatedUsers() {
                     const start = (this.currentPage - 1) * this.itemsPerPage;
                     const end = start + this.itemsPerPage;
-                    return this.filteredBooks.slice(start, end);
+                    return this.filteredUsers.slice(start, end);
                 },
 
                 get totalPages() {
-                    return Math.ceil(this.filteredBooks.length / this.itemsPerPage);
+                    return Math.ceil(this.filteredUsers.length / this.itemsPerPage);
                 },
 
                 // Methods
                 resetForm() {
                     this.form = {
                         id: null,
-                        title: '',
-                        author: '',
-                        publisher: '',
-                        year: new Date().getFullYear(),
-                        isbn: '',
-                        description: '',
-                        category_id: '',
-                        stock: 1
+                        name: '',
+                        email: '',
+                        role: '',
+                        total_points: '',
                     };
                 },
 
                 submitForm() {
                     if (this.editMode) {
-                        this.updateBook();
+                        this.updateUser();
                     } else {
-                        this.addBook();
+                        this.addUser();
                     }
                 },
 
-                addBook() {
+                addUser() {
                     // Generate new ID
-                    const newId = Math.max(...this.books.map(b => b.id)) + 1;
+                    const newId = Math.max(...this.users.map(b => b.id)) + 1;
 
-                    // Get category name
-                    const categories = {
-                        '1': 'Teknologi',
-                        '2': 'Bisnis',
-                        '3': 'Fiksi',
-                        '4': 'Sejarah'
+                    // Get role name
+                    const roles = {
+                        '1': 'admin',
+                        '2': 'anggota',
+                        '3': 'pustakawan',
                     };
 
-                    const newBook = {
+                    const newUser = {
                         id: newId,
                         ...this.form,
-                        category: categories[this.form.category_id] || 'Lainnya',
-                        cover_image: '/api/placeholder/200/300',
-                        rating: 0
                     };
 
-                    this.books.unshift(newBook);
+                    this.users.unshift(newUser);
                     this.showForm = false;
                     this.resetForm();
-                    this.showToast('Buku berhasil ditambahkan!', 'success');
+                    this.showToast('User berhasil ditambahkan!', 'success');
                 },
 
-                editBook(book) {
+                editUser(user) {
                     this.editMode = true;
-                    this.form = { ...book };
+                    this.form = { ...user };
                     this.showForm = true;
                 },
 
-                updateBook() {
-                    const index = this.books.findIndex(book => book.id === this.form.id);
+                updateUser() {
+                    const index = this.users.findIndex(user => user.id === this.form.id);
                     if (index !== -1) {
-                        // Get category name
-                        const categories = {
-                            '1': 'Teknologi',
-                            '2': 'Bisnis',
-                            '3': 'Fiksi',
-                            '4': 'Sejarah'
-                        };
+                        // Get role name
+                        const roles = {
+                        '1': 'admin',
+                        '2': 'anggota',
+                        '3': 'pustakawan',
+                    };
 
-                        this.books[index] = {
-                            ...this.books[index],
+                        this.users[index] = {
+                            ...this.users[index],
                             ...this.form,
-                            category: categories[this.form.category_id] || 'Lainnya'
+                            role: roles[this.form.role] || 'Lainnya'
                         };
 
                         this.showForm = false;
                         this.resetForm();
                         this.editMode = false;
-                        this.showToast('Buku berhasil diupdate!', 'success');
+                        this.showToast('User berhasil diupdate!', 'success');
                     }
                 },
 
-                viewBook(book) {
-                    this.selectedBook = book;
+                viewUser(user) {
+                    this.selectedUser = user;
                     this.showDetail = true;
                 },
 
-                deleteBook(book) {
-                    this.bookToDelete = book;
+                deleteUser(user) {
+                    this.userToDelete = user;
                     this.showDeleteConfirm = true;
                 },
 
                 confirmDelete() {
-                    if (this.bookToDelete) {
-                        const index = this.books.findIndex(book => book.id === this.bookToDelete.id);
+                    if (this.userToDelete) {
+                        const index = this.users.findIndex(user => user.id === this.userToDelete.id);
                         if (index !== -1) {
-                            this.books.splice(index, 1);
-                            this.showToast('Buku berhasil dihapus!', 'success');
+                            this.users.splice(index, 1);
+                            this.showToast('User berhasil dihapus!', 'success');
                         }
                     }
                     this.showDeleteConfirm = false;
-                    this.bookToDelete = null;
+                    this.userToDelete = null;
                 },
 
                 showToast(message, type = 'success') {
@@ -628,7 +570,7 @@
                 init() {
                     // Watch for filter changes to reset pagination
                     this.$watch('searchQuery', () => this.currentPage = 1);
-                    this.$watch('selectedCategory', () => this.currentPage = 1);
+                    this.$watch('selectedRole', () => this.currentPage = 1);
                     this.$watch('sortBy', () => this.currentPage = 1);
                 }
             }

@@ -2,9 +2,9 @@
     $routeName = Route::currentRouteName();
     $pageTitle = match($routeName) {
         'dashboard' => 'Dashboard',
-        'books.index' => 'Buku',
-        'books.create' => 'Tambah Buku',
-        'members.index' => 'Daftar Anggota',
+        'buku' => 'Buku',
+        'anggota' => 'Anggota',
+        'pengguna' => 'Pengguna',
         default => 'Halaman'
     };
 @endphp

@@ -3,7 +3,7 @@
              :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
 
             <!-- Logo -->
-            <a href="#" class="flex items-center justify-center hover:-translate-y-1 ease-in-out transition-transform h-16 m-2 p-3 bg-light/10 backdrop-blur-lg rounded-xl shadow-blue-950/50 shadow-lg">
+            <a href="/" class="flex items-center justify-center hover:-translate-y-1 ease-in-out transition-transform h-16 m-2 p-3 bg-light/10 backdrop-blur-lg rounded-xl shadow-blue-950/50 shadow-lg">
                 <div class="flex items-center space-x-3 justify-around">
                     <div class="w-10 h-10 bg-light rounded-lg flex items-center justify-center">
                         <i class="fas fa-book text-blue-900 text-xl"></i>
@@ -77,20 +77,20 @@
                 navigation: [
                     {
                         name: 'Dashboard',
-                        route: 'dashboard',
+                        route: '/dashboard',
                         icon: 'fas fa-home',
                         active: window.location.pathname.startsWith('/dashboard'),
                         submenu: null
                     },
                     {
                         name: 'Buku',
-                        route: 'books',
+                        route: 'buku',
                         icon: 'fas fa-book',
-                        active: window.location.pathname.startsWith('/books'),
+                        active: window.location.pathname.startsWith('/buku'),
                         submenu: [
-                            { name: 'Daftar Buku',route: 'books',active: window.location.pathname.startsWith('/books/lists'), },
-                            { name: 'Tambah Buku',route: 'books.create',active: window.location.pathname.startsWith('/books/create'),},
-                            { name: 'Kategori Buku',route: 'categories',active: window.location.pathname.startsWith('/categories'), },
+                            { name: 'Daftar Buku',route: 'buku',active: window.location.pathname.startsWith('/buku'), },
+                            { name: 'Tambah Buku',route: 'buku.create',active: window.location.pathname.startsWith('/buku/create'),},
+                            { name: 'Kategori Buku',route: 'kategori',active: window.location.pathname.startsWith('/kategori'), },
                         ]
                     },
                     {
@@ -107,12 +107,14 @@
                     {
                         name: 'Anggota',
                         route: 'anggota',
-                        icon: 'fas fa-users',
+                        icon: 'fas fa-user-group',
                         active: window.location.pathname.startsWith('/anggota'),
-                        submenu: [
-                            { name: 'Daftar Anggota',route: 'anggota',active: window.location.pathname.startsWith('/anggota'), },
-                            { name: 'Tambah Anggota',route: 'anggota',active: window.location.pathname.startsWith('/anggota'), }
-                        ]
+                    },
+                    {
+                        name: 'Pengguna',
+                        route: 'pengguna',
+                        icon: 'fas fa-users',
+                        active: window.location.pathname.startsWith('/pengguna'),
                     },
                     {
                         name: 'Laporan',
