@@ -1,18 +1,31 @@
 <?php
 
-use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\ProfileController;
 
-// Route::get('/', function () {
-//     return view('app');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name(name: 'dashboard');
-Route::get('/buku', [BookController::class, 'index'])->name('buku');
-Route::get('/kategori', [CategoryController::class, 'index'])->name('kategori');
-Route::get('/pengguna', [UserController::class, 'index'])->name('pengguna');
-Route::get('/anggota', [UserController::class, 'index'])->name('anggota');
+Route::get('/dashboard', function () {
+    return view('pages.dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/buku', [BookController::class, 'index'])->name('buku');
+    Route::post('/buku', [BookController::class, 'store'])->name('buku.store');
+
+    Route::get('/anggota', [AnggotaController::class, 'index',])->name('anggota');
+
+});
+
+
+
+
+require __DIR__.'/auth.php';

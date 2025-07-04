@@ -12,20 +12,20 @@
         rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-50 font-sans">
+<body class="bg-light manrope">
      <div x-data="libraryApp()" class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
-        <div class="fixed inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-blue-900 to-blue-800 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0"
+        <div class="fixed inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-blue-900 to-infodark transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0"
              :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
 
             <!-- Logo -->
             <div class="flex items-center justify-center h-16 px-4 bg-blue-900 shadow-lg">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                    <div class="w-10 h-10 bg-light rounded-lg flex items-center justify-center">
                         <i class="fas fa-book text-blue-900 text-xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-white font-bold text-lg">DigiLib</h1>
+                        <h1 class="text-light font-bold text-lg">DigiLib</h1>
                         <p class="text-blue-200 text-xs">Perpustakaan Digital</p>
                     </div>
                 </div>
@@ -38,11 +38,11 @@
                         <a href="#"
                            @click.prevent="setActiveMenu(item.name)"
                            class="flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md transform hover:scale-105"
-                           :class="activeMenu === item.name ? 'bg-blue-700 text-white shadow-lg' : 'text-blue-200 hover:text-white'">
+                           :class="activeMenu === item.name ? 'bg-blue-700 text-light shadow-lg' : 'text-blue-200 hover:text-light'">
                             <i :class="item.icon" class="w-5 h-5 mr-3"></i>
                             <span x-text="item.name"></span>
                             <span x-show="item.badge"
-                                  class="ml-auto bg-red-500 text-white text-xs rounded-full px-2 py-1"
+                                  class="ml-auto bg-danger text-light text-xs rounded-full px-2 py-1"
                                   x-text="item.badge"></span>
                         </a>
 
@@ -55,8 +55,8 @@
                             <template x-for="subitem in item.submenu" :key="subitem.name">
                                 <a href="#"
                                    @click.prevent="setActiveSubmenu(subitem.name)"
-                                   class="block px-4 py-2 text-sm text-blue-200 hover:text-white hover:bg-blue-700 rounded-lg transition-colors duration-200"
-                                   :class="activeSubmenu === subitem.name ? 'bg-blue-700 text-white' : ''"
+                                   class="block px-4 py-2 text-sm text-blue-200 hover:text-light hover:bg-blue-700 rounded-lg transition-colors duration-200"
+                                   :class="activeSubmenu === subitem.name ? 'bg-blue-700 text-light' : ''"
                                    x-text="subitem.name"></a>
                             </template>
                         </div>
@@ -66,14 +66,14 @@
 
             <!-- User Profile -->
             <div class="absolute bottom-0 left-0 right-0 p-4 bg-blue-900">
-                <div class="flex items-center space-x-3 p-3 bg-blue-800 rounded-lg">
+                <div class="flex items-center space-x-3 p-3 bg-infodark rounded-lg">
                     <img src="https://ui-avatars.com/api/?name=Admin&background=3B82F6&color=fff"
                          alt="Avatar" class="w-10 h-10 rounded-full">
                     <div class="flex-1">
-                        <p class="text-white font-medium text-sm">Admin User</p>
+                        <p class="text-light font-medium text-sm">Admin User</p>
                         <p class="text-blue-200 text-xs">administrator</p>
                     </div>
-                    <button class="text-blue-200 hover:text-white transition-colors">
+                    <button class="text-blue-200 hover:text-light transition-colors">
                         <i class="fas fa-sign-out-alt"></i>
                     </button>
                 </div>
@@ -83,14 +83,14 @@
         <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden lg:ml-0">
             <!-- Header -->
-            <header class="bg-white shadow-sm border-b border-gray-200">
+            <header class="bg-light shadow-sm border-b border-gray-200">
                 <div class="flex items-center justify-between px-6 py-4">
                     <div class="flex items-center space-x-4">
                         <button @click="sidebarOpen = !sidebarOpen"
-                                class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                                class="lg:hidden p-2 rounded-lg hover:bg-lighthover transition-colors">
                             <i class="fas fa-bars text-gray-600"></i>
                         </button>
-                        <h1 class="text-2xl font-bold text-gray-800" x-text="pageTitle"></h1>
+                        <h1 class="text-2xl font-bold text-darkhover" x-text="pageTitle"></h1>
                     </div>
 
                     <!-- Header Actions -->
@@ -100,15 +100,15 @@
                             <input type="text"
                                    placeholder="Cari buku, pengarang..."
                                    class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-muted"></i>
                         </div>
 
                         <!-- Notifications -->
                         <div class="relative" x-data="{ open: false }">
                             <button @click="open = !open"
-                                    class="relative p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                                    class="relative p-2 rounded-lg hover:bg-lighthover transition-colors">
                                 <i class="fas fa-bell text-gray-600"></i>
-                                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                                <span class="absolute -top-1 -right-1 bg-danger text-light text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
                             </button>
 
                             <!-- Dropdown -->
@@ -117,19 +117,19 @@
                                  x-transition:enter="transition ease-out duration-200"
                                  x-transition:enter-start="opacity-0 transform translate-y-2"
                                  x-transition:enter-end="opacity-100 transform translate-y-0"
-                                 class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                                 class="absolute right-0 mt-2 w-80 bg-light rounded-lg shadow-lg border border-gray-200 z-50">
                                 <div class="p-4 border-b border-gray-200">
-                                    <h3 class="font-semibold text-gray-800">Notifikasi</h3>
+                                    <h3 class="font-semibold text-darkhover">Notifikasi</h3>
                                 </div>
                                 <div class="max-h-64 overflow-y-auto">
-                                    <div class="p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer">
-                                        <p class="text-sm font-medium text-gray-800">Buku baru ditambahkan</p>
-                                        <p class="text-xs text-gray-500 mt-1">"JavaScript: The Good Parts" telah tersedia</p>
+                                    <div class="p-4 border-b border-lighthover hover:bg-light cursor-pointer">
+                                        <p class="text-sm font-medium text-darkhover">Buku baru ditambahkan</p>
+                                        <p class="text-xs text-light mt-1">"JavaScript: The Good Parts" telah tersedia</p>
                                         <p class="text-xs text-blue-500 mt-1">2 menit yang lalu</p>
                                     </div>
-                                    <div class="p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer">
-                                        <p class="text-sm font-medium text-gray-800">Pengembalian terlambat</p>
-                                        <p class="text-xs text-gray-500 mt-1">John Doe terlambat mengembalikan buku</p>
+                                    <div class="p-4 border-b border-lighthover hover:bg-light cursor-pointer">
+                                        <p class="text-sm font-medium text-darkhover">Pengembalian terlambat</p>
+                                        <p class="text-xs text-light mt-1">John Doe terlambat mengembalikan buku</p>
                                         <p class="text-xs text-blue-500 mt-1">1 jam yang lalu</p>
                                     </div>
                                 </div>
@@ -140,12 +140,12 @@
             </header>
 
             <!-- Page Content -->
-            <main class="flex-1 overflow-y-auto p-6 bg-gray-50">
+            <main class="flex-1 overflow-y-auto p-6 bg-light">
                 <!-- Dashboard Content -->
                 <div x-show="activeMenu === 'Dashboard'">
                     <!-- Stats Cards -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 text-white transform hover:scale-105 transition-transform duration-200 shadow-lg">
+                        <div class="bg-gradient-to-r from-blue-500 to-info rounded-xl p-6 text-light transform hover:scale-105 transition-transform duration-200 shadow-lg">
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-blue-100 text-sm">Total Buku</p>
@@ -157,10 +157,10 @@
                             </div>
                         </div>
 
-                        <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-white transform hover:scale-105 transition-transform duration-200 shadow-lg">
+                        <div class="bg-gradient-to-r from-success to-green-600 rounded-xl p-6 text-light transform hover:scale-105 transition-transform duration-200 shadow-lg">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-green-100 text-sm">Dipinjam Hari Ini</p>
+                                    <p class="text-successlight text-sm">Dipinjam Hari Ini</p>
                                     <p class="text-3xl font-bold">45</p>
                                 </div>
                                 <div class="bg-green-400 bg-opacity-30 rounded-full p-3">
@@ -169,7 +169,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-6 text-white transform hover:scale-105 transition-transform duration-200 shadow-lg">
+                        <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-6 text-light transform hover:scale-105 transition-transform duration-200 shadow-lg">
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-purple-100 text-sm">Anggota Aktif</p>
@@ -181,7 +181,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-6 text-white transform hover:scale-105 transition-transform duration-200 shadow-lg">
+                        <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-6 text-light transform hover:scale-105 transition-transform duration-200 shadow-lg">
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-orange-100 text-sm">Terlambat</p>
@@ -195,14 +195,14 @@
                     </div>
 
                     <!-- Book Carousel -->
-                    <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                    <div class="bg-light rounded-xl shadow-lg p-6 mb-8">
                         <div class="flex items-center justify-between mb-6">
-                            <h2 class="text-xl font-bold text-gray-800">Buku Terpopuler</h2>
+                            <h2 class="text-xl font-bold text-darkhover">Buku Terpopuler</h2>
                             <div class="flex space-x-2">
-                                <button @click="prevSlide()" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+                                <button @click="prevSlide()" class="p-2 rounded-full bg-lighthover hover:bg-gray-200 transition-colors">
                                     <i class="fas fa-chevron-left text-gray-600"></i>
                                 </button>
-                                <button @click="nextSlide()" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+                                <button @click="nextSlide()" class="p-2 rounded-full bg-lighthover hover:bg-gray-200 transition-colors">
                                     <i class="fas fa-chevron-right text-gray-600"></i>
                                 </button>
                             </div>
@@ -214,16 +214,16 @@
                                 <template x-for="(book, index) in popularBooks" :key="index">
                                     <div class="w-full flex-shrink-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                         <template x-for="item in book" :key="item.id">
-                                            <div class="bg-gray-50 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer">
+                                            <div class="bg-light rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer">
                                                 <img :src="item.cover" :alt="item.title" class="w-full h-48 object-cover rounded-lg mb-3">
-                                                <h3 class="font-semibold text-gray-800 text-sm mb-1" x-text="item.title"></h3>
+                                                <h3 class="font-semibold text-darkhover text-sm mb-1" x-text="item.title"></h3>
                                                 <p class="text-gray-600 text-xs mb-2" x-text="item.author"></p>
                                                 <div class="flex items-center justify-between">
                                                     <div class="flex items-center space-x-1">
                                                         <i class="fas fa-star text-yellow-400 text-xs"></i>
                                                         <span class="text-xs text-gray-600" x-text="item.rating"></span>
                                                     </div>
-                                                    <span class="text-xs text-blue-600 font-medium" x-text="`${item.borrowed} dipinjam`"></span>
+                                                    <span class="text-xs text-info font-medium" x-text="`${item.borrowed} dipinjam`"></span>
                                                 </div>
                                             </div>
                                         </template>
@@ -236,8 +236,8 @@
                     <!-- Charts and Activity -->
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <!-- Activity Chart -->
-                        <div class="bg-white rounded-xl shadow-lg p-6">
-                            <h3 class="text-lg font-bold text-gray-800 mb-4">Aktivitas Peminjaman</h3>
+                        <div class="bg-light rounded-xl shadow-lg p-6">
+                            <h3 class="text-lg font-bold text-darkhover mb-4">Aktivitas Peminjaman</h3>
                             <div class="h-64 bg-gradient-to-t from-blue-100 to-transparent rounded-lg flex items-end justify-center">
                                 <div class="text-center">
                                     <i class="fas fa-chart-line text-4xl text-blue-500 mb-2"></i>
@@ -247,17 +247,17 @@
                         </div>
 
                         <!-- Top Users -->
-                        <div class="bg-white rounded-xl shadow-lg p-6">
-                            <h3 class="text-lg font-bold text-gray-800 mb-4">Top 10 Anggota Aktif</h3>
+                        <div class="bg-light rounded-xl shadow-lg p-6">
+                            <h3 class="text-lg font-bold text-darkhover mb-4">Top 10 Anggota Aktif</h3>
                             <div class="space-y-3">
                                 <template x-for="(user, index) in topUsers" :key="user.id">
-                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                                    <div class="flex items-center justify-between p-3 bg-light rounded-lg hover:bg-lighthover transition-colors">
                                         <div class="flex items-center space-x-3">
-                                            <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm"
+                                            <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-light font-bold text-sm"
                                                  x-text="index + 1"></div>
                                             <div>
-                                                <p class="font-medium text-gray-800 text-sm" x-text="user.name"></p>
-                                                <p class="text-gray-500 text-xs" x-text="`${user.books} buku dipinjam`"></p>
+                                                <p class="font-medium text-darkhover text-sm" x-text="user.name"></p>
+                                                <p class="text-light text-xs" x-text="`${user.books} buku dipinjam`"></p>
                                             </div>
                                         </div>
                                         <div class="flex items-center space-x-2">
@@ -275,7 +275,7 @@
                 <div x-show="activeMenu !== 'Dashboard'" class="text-center py-16">
                     <i class="fas fa-cog text-6xl text-gray-300 mb-4"></i>
                     <h2 class="text-2xl font-bold text-gray-600 mb-2" x-text="`Halaman ${activeMenu}`"></h2>
-                    <p class="text-gray-500">Konten untuk halaman ini sedang dalam pengembangan.</p>
+                    <p class="text-light">Konten untuk halaman ini sedang dalam pengembangan.</p>
                 </div>
             </main>
         </div>

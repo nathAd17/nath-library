@@ -11,7 +11,7 @@
                         <p class="text-3xl font-bold text-gray-900">1,234</p>
                     </div>
                     <div class="w-12 h-12 bg-cyan-500 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-user text-white text-xl"></i>
+                        <i class="fas fa-user text-light text-xl"></i>
                     </div>
                 </div>
             </div>
@@ -22,8 +22,8 @@
                         <h3 class="text-gray-600 text-sm font-medium">Anggota</h3>
                         <p class="text-3xl font-bold text-gray-900">892</p>
                     </div>
-                    <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-check-circle text-white text-xl"></i>
+                    <div class="w-12 h-12 bg-success rounded-lg flex items-center justify-center">
+                        <i class="fas fa-check-circle text-light text-xl"></i>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                         <p class="text-3xl font-bold text-gray-900">342</p>
                     </div>
                     <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-user-reader text-white text-xl"></i>
+                        <i class="fas fa-user-reader text-light text-xl"></i>
                     </div>
                 </div>
             </div>
@@ -47,18 +47,18 @@
                         <p class="text-3xl font-bold text-gray-900">28</p>
                     </div>
                     <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-tags text-white text-xl"></i>
+                        <i class="fas fa-tags text-light text-xl"></i>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Action Bar -->
-        <div class="bg-white rounded-lg shadow-sm border mb-6">
+        <div class="bg-light rounded-lg shadow-sm border mb-6">
             <div class="p-6 flex items-center justify-between">
                 <div class="flex items-center space-x-4">
                     <button @click="showForm = true; editMode = false; resetForm()"
-                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
+                        class="bg-info text-light px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
                         <i class="fas fa-plus"></i>
                         <span>Tambah Pengguna</span>
                     </button>
@@ -82,27 +82,27 @@
         </div>
 
         <!-- Books Table -->
-        <div class="bg-white rounded-lg shadow-sm border overflow-hidden">
+        <div class="bg-light rounded-lg shadow-sm border overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full">
-                    <thead class="bg-gray-50">
+                    <thead class="bg-light">
                         <tr>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gambar
+                            <th class="px-6 py-4 text-left text-xs font-medium text-light uppercase tracking-wider">Gambar
                             </th>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama
+                            <th class="px-6 py-4 text-left text-xs font-medium text-light uppercase tracking-wider">Nama
                             </th>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="px-6 py-4 text-left text-xs font-medium text-light uppercase tracking-wider">
                                 Role</th>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total points
+                            <th class="px-6 py-4 text-left text-xs font-medium text-light uppercase tracking-wider">Total points
                             </th>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi
+                            <th class="px-6 py-4 text-left text-xs font-medium text-light uppercase tracking-wider">Aksi
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody class="bg-light divide-y divide-gray-200">
                         <template x-for="user in paginatedUsers" :key="user.id">
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap">
+                            <tr class="hover:bg-light">
+                                <td class="px-6 py-4 lightspace-nowrap">
                                     <div
                                         class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
                                         <img :src="`https://ui-avatars.com/api/?name=${user.name}&background=3B82F6&color=fff`" :alt="user.name"
@@ -112,25 +112,25 @@
                                 <td class="px-6 py-4">
                                     <div class="max-w-xs">
                                         <div class="text-sm font-medium text-gray-900 truncate" x-text="user.name"></div>
-                                        <div class="text-xs text-gray-400" x-text="user.email">
+                                        <div class="text-xs text-muted" x-text="user.email">
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 lightspace-nowrap">
                                     <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-infodark"
                                         x-text="user.role"></span>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 lightspace-nowrap">
                                     <div class="flex items-center space-x-2">
                                         <span class="text-sm font-medium text-gray-900" x-text="user.total_points"></span>
-                                        <span class="text-xs text-gray-500">pts</span>
+                                        <span class="text-xs text-light">pts</span>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <td class="px-6 py-4 lightspace-nowrap text-sm font-medium">
                                     <div class="flex items-center space-x-2">
                                         <button @click="viewUser(user)"
-                                            class="text-blue-600 hover:text-blue-900 p-1 rounded transition-colors"
+                                            class="text-info hover:text-blue-900 p-1 rounded transition-colors"
                                             title="Lihat Detail">
                                             <i class="fas fa-eye"></i>
                                         </button>
@@ -153,24 +153,24 @@
             </div>
 
             <!-- Pagination -->
-            <div class="bg-white px-6 py-4 border-t border-gray-200 flex items-center justify-between">
-                <div class="text-sm text-gray-700">
+            <div class="bg-light px-6 py-4 border-t border-gray-200 flex items-center justify-between">
+                <div class="text-sm text-dark">
                     Menampilkan <span x-text="(currentPage - 1) * itemsPerPage + 1"></span> sampai
                     <span x-text="Math.min(currentPage * itemsPerPage, filteredUsers.length)"></span> dari
                     <span x-text="filteredUsers.length"></span> buku
                 </div>
                 <div class="flex items-center space-x-2">
                     <button @click="currentPage > 1 && currentPage--" :disabled="currentPage === 1"
-                        class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                        class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-light disabled:opacity-50 disabled:cursor-not-allowed">
                         Sebelumnya
                     </button>
                     <template x-for="page in totalPages" :key="page">
                         <button @click="currentPage = page"
-                            :class="currentPage === page ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-50'"
+                            :class="currentPage === page ? 'bg-info text-light' : 'text-dark hover:bg-light'"
                             class="px-3 py-1 text-sm border border-gray-300 rounded-md" x-text="page"></button>
                     </template>
                     <button @click="currentPage < totalPages && currentPage++" :disabled="currentPage === totalPages"
-                        class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                        class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-light disabled:opacity-50 disabled:cursor-not-allowed">
                         Selanjutnya
                     </button>
                 </div>
@@ -183,36 +183,36 @@
             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
             class="fixed inset-0 z-50 overflow-y-auto" style="display: none;">
             <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+                <div class="fixed inset-0 bg-light bg-opacity-75 transition-opacity"></div>
 
                 <div
-                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+                    class="inline-block align-bottom bg-light rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
                     <form @submit.prevent="submitForm()">
-                        <div class="bg-white px-6 pt-6 pb-4">
+                        <div class="bg-light px-6 pt-6 pb-4">
                             <div class="flex items-center justify-between mb-4">
                                 <h3 class="text-lg font-medium text-gray-900"
                                     x-text="editMode ? 'Edit User' : 'Tambah User Baru'"></h3>
-                                <button type="button" @click="showForm = false" class="text-gray-400 hover:text-gray-600">
+                                <button type="button" @click="showForm = false" class="text-muted hover:text-gray-600">
                                     <i class="fas fa-times text-xl"></i>
                                 </button>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div class="md:col-span-2">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Nama *</label>
+                                    <label class="block text-sm font-medium text-dark mb-2">Nama *</label>
                                     <input type="text" x-model="form.name"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                         placeholder="Masukkan nama pengguna" required>
                                 </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                                    <label class="block text-sm font-medium text-dark mb-2">Email *</label>
                                     <input type="text" x-model="form.email"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                         placeholder="Masukan email pengguna" required>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Role *</label>
+                                    <label class="block text-sm font-medium text-dark mb-2">Role *</label>
                                     <select x-model="form.role"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                         required>
@@ -225,13 +225,13 @@
                             </div>
                         </div>
 
-                        <div class="bg-gray-50 px-6 py-3 flex items-center justify-end space-x-3">
+                        <div class="bg-light px-6 py-3 flex items-center justify-end space-x-3">
                             <button type="button" @click="showForm = false"
-                                class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+                                class="px-4 py-2 text-sm font-medium text-dark bg-light border border-gray-300 rounded-lg hover:bg-light">
                                 Batal
                             </button>
                             <button type="submit"
-                                class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700">
+                                class="px-4 py-2 text-sm font-medium text-light bg-info border border-transparent rounded-lg hover:bg-blue-700">
                                 <span x-text="editMode ? 'Update User' : 'Simpan User'"></span>
                             </button>
                         </div>
@@ -246,14 +246,14 @@
             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
             class="fixed inset-0 z-50 overflow-y-auto" style="display: none;">
             <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+                <div class="fixed inset-0 bg-light bg-opacity-75 transition-opacity"></div>
 
                 <div
-                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
-                    <div class="bg-white px-6 pt-6 pb-4">
+                    class="inline-block align-bottom bg-light rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+                    <div class="bg-light px-6 pt-6 pb-4">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-lg font-medium text-gray-900">Detail Pengguna</h3>
-                            <button type="button" @click="showDetail = false" class="text-gray-400 hover:text-gray-600">
+                            <button type="button" @click="showDetail = false" class="text-muted hover:text-gray-600">
                                 <i class="fas fa-times text-xl"></i>
                             </button>
                         </div>
@@ -273,11 +273,11 @@
 
                                 <div class="grid grid-cols-2 gap-4 text-sm">
                                     <div>
-                                        <span class="font-medium text-gray-700">Email:</span>
+                                        <span class="font-medium text-dark">Email:</span>
                                         <p class="text-gray-600" x-text="selectedUser?.email"></p>
                                     </div>
                                     <div>
-                                        <span class="font-medium text-gray-700">Role:</span>
+                                        <span class="font-medium text-dark">Role:</span>
                                         <p class="text-gray-600" x-text="selectedUser?.role"></p>
                                     </div>
                                 </div>
@@ -285,13 +285,13 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 px-6 py-3 flex items-center justify-end space-x-3">
+                    <div class="bg-light px-6 py-3 flex items-center justify-end space-x-3">
                         <button type="button" @click="showDetail = false"
-                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+                            class="px-4 py-2 text-sm font-medium text-dark bg-light border border-gray-300 rounded-lg hover:bg-light">
                             Tutup
                         </button>
                         <button type="button" @click="editUser(selectedUser); showDetail = false"
-                            class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700">
+                            class="px-4 py-2 text-sm font-medium text-light bg-info border border-transparent rounded-lg hover:bg-blue-700">
                             Edit Pengguna
                         </button>
                     </div>
@@ -305,11 +305,11 @@
             x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0" class="fixed inset-0 z-50 overflow-y-auto" style="display: none;">
             <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+                <div class="fixed inset-0 bg-light bg-opacity-75 transition-opacity"></div>
 
                 <div
-                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                    <div class="bg-white px-6 pt-6 pb-4">
+                    class="inline-block align-bottom bg-light rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                    <div class="bg-light px-6 pt-6 pb-4">
                         <div class="flex items-center mb-4">
                             <div
                                 class="mx-0 flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
@@ -317,11 +317,11 @@
                             </div>
                             <div class="ml-4">
                                 <h3 class="text-lg font-medium text-gray-900">Hapus Buku</h3>
-                                <p class="text-sm text-gray-500">Apakah Anda yakin ingin menghapus buku ini?</p>
+                                <p class="text-sm text-light">Apakah Anda yakin ingin menghapus buku ini?</p>
                             </div>
                         </div>
 
-                        <div class="bg-gray-50 p-4 rounded-lg" x-show="userToDelete">
+                        <div class="bg-light p-4 rounded-lg" x-show="userToDelete">
                             <div class="flex items-center space-x-3">
                                 <div
                                     class="w-12 h-16 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden">
@@ -330,22 +330,22 @@
                                 </div>
                                 <div>
                                     <p class="font-medium text-gray-900" x-text="userToDelete?.title"></p>
-                                    <p class="text-sm text-gray-500" x-text="userToDelete?.author"></p>
+                                    <p class="text-sm text-light" x-text="userToDelete?.author"></p>
                                 </div>
                             </div>
                         </div>
 
-                        <p class="text-sm text-gray-500 mt-4">Data buku yang dihapus tidak dapat dikembalikan. Pastikan
+                        <p class="text-sm text-light mt-4">Data buku yang dihapus tidak dapat dikembalikan. Pastikan
                             tidak ada transaksi yang sedang berlangsung untuk buku ini.</p>
                     </div>
 
-                    <div class="bg-gray-50 px-6 py-3 flex items-center justify-end space-x-3">
+                    <div class="bg-light px-6 py-3 flex items-center justify-end space-x-3">
                         <button type="button" @click="showDeleteConfirm = false; userToDelete = null"
-                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+                            class="px-4 py-2 text-sm font-medium text-dark bg-light border border-gray-300 rounded-lg hover:bg-light">
                             Batal
                         </button>
                         <button type="button" @click="confirmDelete()"
-                            class="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-lg hover:bg-red-700">
+                            class="px-4 py-2 text-sm font-medium text-light bg-red-600 border border-transparent rounded-lg hover:bg-dangerdark">
                             Hapus Buku
                         </button>
                     </div>
@@ -361,18 +361,18 @@
             x-transition:leave-start="opacity-100 transform translate-y-0"
             x-transition:leave-end="opacity-0 transform translate-y-2" class="fixed top-4 right-4 z-50 max-w-sm w-full"
             style="display: none;">
-            <div :class="toast.type === 'success' ? 'bg-green-100 border-green-500 text-green-700' : 'bg-red-100 border-red-500 text-red-700'"
+            <div :class="toast.type === 'success' ? 'bg-successlight border-success text-green-700' : 'bg-red-100 border-danger text-dangerdark'"
                 class="border-l-4 p-4 rounded-lg shadow-lg">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
                         <i
-                            :class="toast.type === 'success' ? 'fas fa-check-circle text-green-500' : 'fas fa-exclamation-circle text-red-500'"></i>
+                            :class="toast.type === 'success' ? 'fas fa-check-circle text-success' : 'fas fa-exclamation-circle text-danger'"></i>
                     </div>
                     <div class="ml-3">
                         <p class="text-sm font-medium" x-text="toast.message"></p>
                     </div>
                     <div class="ml-auto pl-3">
-                        <button @click="toast.show = false" class="text-gray-400 hover:text-gray-600">
+                        <button @click="toast.show = false" class="text-muted hover:text-gray-600">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
