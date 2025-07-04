@@ -16,7 +16,7 @@ class BookPolicy
     // }
 
     public function viewAny(User $user) {
-        return true;
+        return in_array($user->role, ['admin', 'anggota', 'pustakawan']);
     }
 
     public function view(?User $user, Book $book) {
@@ -27,12 +27,12 @@ class BookPolicy
         return $user->canManageBooks();
     }
 
-    public function update(User $user, Book $book) {
+    public function update(User $user, Book $books) {
         return $user->canManageBooks();
     }
 
     public function delete(User $user, Book $book) {
-        return $user->canManageBooks();
+        return $user->role === 'admin';
     }
 
     public function borrow(User $user, Book $book) {

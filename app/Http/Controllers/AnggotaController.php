@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 class AnggotaController extends Controller
 {
     public function index() {
-        $members = User::with(['transactions', 'notifications', 'badges', 'gamificationLogs'])->isAnggota()->get();
+        $roles = ['admin','anggota','pustakawan'];
+        $members = User::with(['transactions', 'notifications', 'badges', 'gamificationLogs'])->get();
 
-        return view('pages.members', $members);
+        return view('pages.members', compact('members', 'roles'));
     }
 }

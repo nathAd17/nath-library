@@ -31,6 +31,7 @@ export default {
                 lighthover: "#e2e8f0", // gray 100
                 muted: "#9ca3af", // gray 400
                 info: "#2563eb", // blue 600
+                infodark: "#1e40af" // blue 800
             },
         },
     },

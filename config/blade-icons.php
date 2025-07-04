@@ -111,7 +111,7 @@ return [
     |
     */
 
-    'class' => 'icon icon-default bg-gray-700',
+    'class' => 'icon icon-default bg-dark',
 
     /*
     |--------------------------------------------------------------------------
